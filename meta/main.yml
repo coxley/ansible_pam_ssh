@@ -1,6 +1,6 @@
 galaxy_info:
   author: Codey Oxley
-  description: Multi-distro installation + configuration for pam_ssh_agent_auth
+  description: Multi-distro installation and configuration for pam_ssh_agent_auth
   license: license (WTFPL)
   min_ansible_version: 1.9
   platforms:
@@ -14,5 +14,7 @@ galaxy_info:
     - ssh
     - authentication
     - pam_ssh_agent_auth
+    - Archlinux
+    - Ubuntu
 dependencies:
   - coxley.packer
