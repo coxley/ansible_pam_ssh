@@ -1,0 +1,15 @@
+---
+
+- name: coxley.pam_ssh | Handle package
+  become: true
+  packer: name={{ pam_ssh_pkgname }} state={{ pam_ssh_state }}
+
+- name: coxley.pam_ssh | Configure Debian /etc/pam.d/sudo
+  become: true
+  lineinfile:
+    dest: /etc/pam.d/sudo
+    line: 'auth sufficient pam_ssh_agent_auth.so file={{ pam_ssh_keypath }}'
+    insertbefore: '^auth'
+    state: '{{ pam_ssh_state }}'
+  notify:
+    - coxley.pam_ssh | Restart sudo

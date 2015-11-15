@@ -1,0 +1,21 @@
+---
+
+- name: coxley.pam_ssh | Requirements
+  include: requirements.yml
+
+- name: coxley.pam_ssh | Prepare sudoers
+  become: true
+  lineinfile:
+    state: present
+    dest: /etc/sudoers.d/fix-ssh-agent
+    regexp: '^Defaults env_keep\+\=SSH_AUTH_SOCK'
+    line: 'Defaults env_keep+=SSH_AUTH_SOCK'
+    create: yes
+
+- name: coxley.pam_ssh | Start Debian install
+  include: debian.yml
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: coxley.pam_ssh | Start ArchLinux install
+  include: arch.yml
+  when: ansible_distribution == 'ArchLinux'

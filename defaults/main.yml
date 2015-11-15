@@ -1,0 +1,3 @@
+---
+pam_ssh_state: present
+pam_ssh_keypath: %h/.ssh/authorized_keys

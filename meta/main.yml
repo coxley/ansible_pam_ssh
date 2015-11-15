@@ -1,0 +1,18 @@
+galaxy_info:
+  author: Codey Oxley
+  description: Multi-distro installation + configuration for pam_ssh_agent_auth
+  license: license (WTFPL)
+  min_ansible_version: 1.9
+  platforms:
+  - name: Ubuntu
+   versions:
+     - all
+  - name: Archlinux
+  galaxy_tags:
+    - pam
+    - ssh-agent
+    - ssh
+    - authentication
+    - pam_ssh_agent_auth
+dependencies:
+  - coxley.packer

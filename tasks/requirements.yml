@@ -1,0 +1,4 @@
+---
+
+- name: coxley.pam_ssh | Require sudo
+  package: name=sudo state=present

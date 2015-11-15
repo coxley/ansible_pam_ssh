@@ -1,0 +1,33 @@
+---
+
+- name: coxley.pam_ssh | Check if installed
+  command: dpkg-query -W {{ pam_ssh_pkgname }}
+  register: pam_ssh_installed
+  failed_when: pam_ssh_installed > 1
+  changed_when: pam_ssh_installed == 1
+
+- name: coxley.pam_ssh | Fetch package
+  get_url: >
+    url={{ pam_ssh_url }}
+    dest=/tmp/{{ pam_ssh_pkgname }}.deb
+  when: pam_ssh_installed == 1
+
+- name: coxley.pam_ssh | Install package
+  apt: deb=/tmp/{{ pam_ssh_pkgname }}.deb
+  become: true
+  when: pam_ssh_installed == 1
+
+- name: coxley.pam_ssh | Remove package
+  apt: name={{ pam_ssh_pkgname }} state=absent purge=true
+  become: true
+  when: pam_ssh_installed == 0 and pam_ssh_state == 'absent'
+
+- name: coxley.pam_ssh | Configure Debian /etc/pam.d/sudo
+  become: true
+  lineinfile:
+    dest: /etc/pam.d/sudo
+    line: 'auth sufficient pam_ssh_agent_auth.so file={{ pam_ssh_keypath }}'
+    insertbefore: '^@include common-auth'
+    state: '{{ pam_ssh_state }}'
+  notify:
+    - coxley.pam_ssh | Restart sudo

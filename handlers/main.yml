@@ -1,0 +1,6 @@
+---
+
+- name: coxley.pam_ssh | Restart sudo
+  service:
+    name: sudo
+    state: restarted
