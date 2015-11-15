@@ -18,4 +18,4 @@
 
 - name: coxley.pam_ssh | Start ArchLinux install
   include: arch.yml
-  when: ansible_distribution == 'ArchLinux'
+  when: ansible_distribution == 'Archlinux'
