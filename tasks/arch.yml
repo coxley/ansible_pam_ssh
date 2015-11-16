@@ -13,5 +13,3 @@
     line: 'auth sufficient pam_ssh_agent_auth.so file={{ pam_ssh_keypath }}'
     insertbefore: '^auth'
     state: '{{ pam_ssh_state }}'
-  notify:
-    - coxley.pam_ssh | Restart sudo
