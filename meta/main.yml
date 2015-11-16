@@ -17,4 +17,4 @@ galaxy_info:
     - Archlinux
     - Ubuntu
 dependencies:
-  - coxley.packer
+  - { role: coxley.packer, when: ansible_os_family == 'Archlinux'}
