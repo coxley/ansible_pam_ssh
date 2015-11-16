@@ -3,6 +3,8 @@
 - name: coxley.pam_ssh | Handle package
   become: true
   packer: name={{ pam_ssh_pkgname }} state={{ pam_ssh_state }}
+  environment:
+    PATH: /usr/bin/core_perl:{{ ansible_env.PATH }}
 
 - name: coxley.pam_ssh | Configure Debian /etc/pam.d/sudo
   become: true
